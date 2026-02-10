@@ -11,6 +11,7 @@ import dev.detekt.api.Location
 import dev.detekt.api.SourceLocation
 import dev.detekt.api.TextLocation
 import dev.detekt.api.modifiedText
+import dev.detekt.api.valueOrDefault
 import dev.detekt.psi.absolutePath
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtPsiFactory

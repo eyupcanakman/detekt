@@ -10,6 +10,7 @@ import com.pinterest.ktlint.ruleset.standard.StandardRule
 import com.pinterest.ktlint.ruleset.standard.rules.MAX_LINE_LENGTH_RULE_ID
 import dev.detekt.api.Config
 import dev.detekt.api.Rule
+import dev.detekt.api.valueOrNull
 import org.ec4j.core.model.Property
 import org.jetbrains.kotlin.psi.KtFile
 
