@@ -28,7 +28,7 @@ import java.nio.file.Path
 /**
  * Rule to detect formatting violations.
  */
-abstract class KtlintRule(config: Config, description: String) : Rule(config, description) {
+internal abstract class KtlintRule(config: Config, description: String) : Rule(config, description) {
 
     abstract val wrapping: StandardRule
 
@@ -36,6 +36,11 @@ abstract class KtlintRule(config: Config, description: String) : Rule(config, de
         get() = config.valueOrNull("code_style")
             ?: config.parent?.let { KtlintWrapperProvider.code_style.value(it) }
             ?: KtlintWrapperProvider.code_style.defaultValue
+
+    protected val indentStyle: String
+        get() = config.valueOrNull("indentStyle")
+            ?: config.parent?.let { KtlintWrapperProvider.indentStyle.value(it) }
+            ?: KtlintWrapperProvider.indentStyle.defaultValue
 
     private lateinit var positionByOffset: (offset: Int) -> Pair<Int, Int>
     private lateinit var root: KtFile
@@ -71,7 +76,7 @@ abstract class KtlintRule(config: Config, description: String) : Rule(config, de
 
         usesEditorConfigProperties[INDENT_STYLE_PROPERTY] = usesEditorConfigProperties.getOrDefault(
             INDENT_STYLE_PROPERTY,
-            "space",
+            indentStyle,
         )
 
         val properties = buildMap {
